@@ -45,7 +45,7 @@ def main():
         upload_rate = (new_upload - init_upload) / duration
         download_rate = (new_download - init_download) / duration
 
-        print("Upload Rate: ", upload_rate * 1024,"KB,\tDownload Rate: ", download_rate, "MB")
+        print("Upload Rate: ", '%.3f' % (upload_rate * 1024),"KB,\tDownload Rate: ", '%.3f' % (download_rate), "MB")
 
 
 #for i in netgear.get_attached_devices():
