@@ -11,6 +11,17 @@ NAME = 'name'
 MAC = 'mac'
 
 
+class Device:
+    def __init__(self, mac, label = '', name = '', is_attached = False):
+        self.label = label
+        self.name = name
+        self.mac = mac
+        self.is_attached = is_attached
+    def __str__(self):
+        return self.label + ", " + self.name + ", " + self.mac + ", " + str(self.is_attached)
+
+
+
 def get_config_devices():
     config_devices = []
     with open('config.json') as config_json:
@@ -19,7 +30,8 @@ def get_config_devices():
             print("No devices in config file")
             sys.exit()
         for device in config[DEVICES]:
-            config_devices.append((device[LABEL], device[NAME], device[MAC]))
+            config_devices.append(Device(mac = device[MAC], label = device[LABEL],
+                name = device[NAME]))
 
     return config_devices
 
@@ -37,7 +49,8 @@ def get_attached_devices(netgear):
 
 
 def check(config_devices, attached_devices):
-    print(config_devices)
+    for device in config_devices:
+        print(device)
     print(attached_devices)
 
 
