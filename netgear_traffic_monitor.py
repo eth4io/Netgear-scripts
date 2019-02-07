@@ -3,9 +3,14 @@ import json
 import time
 import queue
 
-PASSWORD = ''
+ROUTER_ADMIN_PASSWORD = 'router_admin_password'
 NEW_TODAY_UPLOAD = 'NewTodayUpload'
 NEW_TODAY_DOWNLOAD = 'NewTodayDownload'
+
+def get_router_admin_password():
+    with open('config.json') as config_json:
+        config = json.load(config_json)
+        return config[ROUTER_ADMIN_PASSWORD]
 
 def get_traffic_json(netgear):
     traffic = netgear.get_traffic_meter()
@@ -20,7 +25,7 @@ def get_today_upload_and_download(netgear):
     return new_today_upload, new_today_download
 
 def main():
-    netgear = Netgear(password=PASSWORD)
+    netgear = Netgear(password=get_router_admin_password())
     upload_queue = queue.Queue()
     download_queue = queue.Queue()
 
