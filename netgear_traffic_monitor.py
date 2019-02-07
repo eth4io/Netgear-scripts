@@ -2,13 +2,15 @@ from pynetgear import Netgear
 import json
 import time
 import queue
+import os
 
 ROUTER_ADMIN_PASSWORD = 'router_admin_password'
+dir_path = os.path.dirname(os.path.realpath(__file__))
 NEW_TODAY_UPLOAD = 'NewTodayUpload'
 NEW_TODAY_DOWNLOAD = 'NewTodayDownload'
 
 def get_router_admin_password():
-    with open('config.json') as config_json:
+    with open(dir_path + '/config.json') as config_json:
         config = json.load(config_json)
         return config[ROUTER_ADMIN_PASSWORD]
 

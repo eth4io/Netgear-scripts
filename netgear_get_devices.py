@@ -3,8 +3,10 @@ import json
 import time
 import queue
 import sys
+import os
 
 ROUTER_ADMIN_PASSWORD = 'router_admin_password'
+dir_path = os.path.dirname(os.path.realpath(__file__))
 DEVICES = 'devices'
 LABEL = 'label'
 NAME = 'name'
@@ -26,13 +28,13 @@ class Device:
 
 
 def get_router_admin_password():
-    with open('config.json') as config_json:
+    with open(dir_path + '/config.json') as config_json:
         config = json.load(config_json)
         return config[ROUTER_ADMIN_PASSWORD]
 
 def get_config_devices():
     config_devices = []
-    with open('config.json') as config_json:
+    with open(dir_path + '/config.json') as config_json:
         config = json.load(config_json)
         if len(config[DEVICES]) == 0:
             print("No devices in config file")
